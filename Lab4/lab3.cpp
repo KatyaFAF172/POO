@@ -1,6 +1,9 @@
 #include<iostream>
 #include<stack>
 #include<string>
+#include <fstream>
+
+
 using namespace std;
 // Function to check whether two characters are opening
 // and closing of same type.
@@ -38,13 +41,24 @@ bool CheckParantheses(string exp)
 
 int main()
 {
-	/*Code to test the function CheckParantheses*/
-	string expression;
-	cout<<"Enter an expression:  "; // input expression from STDIN/Console
-	cin>>expression;//It is used to accept the input from the standard input device i.e. keyboard.
-	// Driver program to test above function
-	if(CheckParantheses(expression))
-		cout<<"This is the correct expression \n";
-	else
-		cout<<"This isn't the correct expression \n";
+     std::string line_;
+     ifstream file_("three_expressions.txt ");
+
+     if(file_.is_open())
+     {
+         //read file line by line
+         while (getline(file_, line_))
+            {
+            std::cout<<line_<< '\n';
+         if(CheckParantheses(line_))
+            cout<<"This is the correct expression \n";
+         else
+            cout<<"This isn't the correct expression \n";
+            }
+         file_.close();
+     }
+     else
+        std::cout<<"File is not open"<<'\n';
+     std::cin.get();
+     return 0;
 }
